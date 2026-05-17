@@ -7,6 +7,18 @@ const initialState = {
             title: 'Task 1',
             description: 'Description 1',
             completed: false,
+        },
+        {
+            id: 2,
+            title: 'Task 1',
+            description: 'Description 1',
+            completed: false,
+        },
+        {
+            id: 3,
+            title: 'Task 1',
+            description: 'Description 1',
+            completed: true,
         }
     ]
 }
@@ -47,8 +59,8 @@ export const taskSlice = createSlice({
 
 export const {addTask, toggleTaskComplete, editTask, deleteTask} = taskSlice.actions
 
-export const selectTasks = state => state.task.tasks
-export const selectPendingTasks = state => state.task.tasks.filter(task => !task.completed)
-export const selectCompletedTasks = state => state.task.tasks.filter(task => task.completed)
+export const selectTasks = (state) => state.tasks.tasks
+export const selectPendingTasks = (state) => state.tasks.tasks.filter(task => !task.completed)
+export const selectCompletedTasks = (state) => state.tasks.tasks.filter(task => task.completed)
 
 export default taskSlice.reducer
