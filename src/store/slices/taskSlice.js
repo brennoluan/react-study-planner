@@ -1,26 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    tasks: [
-        {
-            id: 1,
-            title: 'Task 1',
-            description: 'Description 1',
-            completed: false,
-        },
-        {
-            id: 2,
-            title: 'Task 1',
-            description: 'Description 1',
-            completed: false,
-        },
-        {
-            id: 3,
-            title: 'Task 1',
-            description: 'Description 1',
-            completed: true,
-        }
-    ]
+    tasks: []
 }
 
 export const taskSlice = createSlice({
@@ -42,14 +23,12 @@ export const taskSlice = createSlice({
             }
         },
         editTask: (state, action) => {
-            const {taskId, updatedTask} = action.payload
-            const tasksIndex = state.task.findIndex(task => task.id === taskId)
-            if (tasksIndex !== -1) {
-                state.tasks[tasksIndex] = {
-                    ...state.tasks[tasksIndex],
-                    ...updatedTask
-                }
+            const {taskId, updatedTask} = action.payload;
+            const taskIndex = state.tasks.findIndex((task) => task.id === taskId);
+            if (taskIndex !== -1) {
+                state.tasks[taskIndex] = {...state.tasks[taskIndex], ...updatedTask};
             }
+            console.log(state.tasks)
         },
         deleteTask: (state, action) => {
             state.tasks = state.tasks.filter(task => task.id !== action.payload)
