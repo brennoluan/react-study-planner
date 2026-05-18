@@ -13,23 +13,23 @@ const analyticSlice = createSlice({
     initialState,
     reducers: {
         updateAnalytics: (state, action) => {
-            const tasks = action.payload
-            const currentDate = new Date()
-            currentDate.setHours(23, 59, 59, 999)
+            const tasks = action.payload;
+            const currentDate = new Date();
+            currentDate.setHours(23, 59, 59, 999);
 
-            state.totalTasks = tasks.length
-            state.completedTaks = tasks.filter(task => task.completed).length
-            state.pendingTasks = tasks.filter(task => !task.completed).length
-            state.overdueTasks = tasks.filter(task => {
-                if (task.completed || !task.date) return false
-                const taskDate = new Date(task.date)
-                return taskDate < currentDate
-            }).length
+            state.totalTasks = tasks.length;
+            state.completedTasks = tasks.filter((task) => task.completed).length;
+            state.pendingTasks = tasks.filter((task) => !task.completed).length;
+
+            state.overdueTasks = tasks.filter((task) => {
+                if (task.completed || !task.date) return false;
+                const [day, month, year] = task.date.split('/');
+                const taskDate = new Date(year, month - 1, day);
+                return taskDate < currentDate;
+            }).length;
 
             state.completionPercentage =
-                state.totalTasks > 0
-                    ? Math.round((state.completedTasks / state.totalTasks) * 100)
-                    : 0
+                state.totalTasks > 0 ? Math.round((state.completedTasks / state.totalTasks) * 100) : 0;
         }
     }
 })
