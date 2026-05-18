@@ -20,12 +20,10 @@ const themeSlice = createSlice({
 export const {setTheme, toggleTheme} = themeSlice.actions
 
 export const selectTheme = (state) => {
-    const isDarkTheme = state.theme === 'dark'
+    const isDarkTheme = state.theme.theme === 'dark';
     return {
         isDark: isDarkTheme,
-        background: isDarkTheme
-            ? "url('/src/assets/bg-dark.png')"
-            : "url('/src/assets/bg-light.png')",
+        background: isDarkTheme ? "url('/src/assets/bg-dark.png')" : "url('/src/assets/bg-light.png')",
         backgroundColor: isDarkTheme ? '#1f2937' : '#f3f4f6',
         cardBg: isDarkTheme ? 'bg-card-dark' : 'bg-white',
         textPrimary: isDarkTheme ? 'text-white' : 'text-gray-800',
@@ -34,8 +32,9 @@ export const selectTheme = (state) => {
         inputBg: isDarkTheme ? 'bg-gray-700' : 'bg-white',
         inputBorder: isDarkTheme ? 'border-gray-600' : 'border-gray-400',
         dividerColor: isDarkTheme ? 'border-gray-600' : 'border-gray-300',
-        dividerPurple: isDarkTheme ? 'border-purple-header' : 'border-purple-600'
-    }
-}
+        dividerPurple: isDarkTheme ? 'border-purple-header' : 'border-purple-600',
+    };
+};
+
 
 export default themeSlice.reducer
